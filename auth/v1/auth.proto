@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package auth.v1;
+
+message BeginAuthRequest {
+}
+
+message BeginAuthResponse {
+	string auth_id = 1;
+}
+
+message NextStepRequest {
+	string auth_id = 1;
+}
+
+message Session {
+	string session_token = 1;
+}
+
+message NextStepResponse {
+	oneof result {
+		Session session = 1;
+	}
+}
+
+service AuthService {
+	rpc BeginAuth(BeginAuthRequest) returns (BeginAuthResponse);
+}
